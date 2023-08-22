@@ -1,0 +1,23 @@
+sudo yum update
+sudo yum search docker
+sudo yum info docker
+docker --version
+sudo yum install docker
+sudo usermod -a -G docker cloud_user
+sudo yum install python3-pip
+sudo pip3 install docker-compose
+pip3 install --user docker-compose
+wget https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)
+sudo mv docker-compose-$(uname -s)-$(uname -m) /usr/local/bin/docker-compose
+sudo chmod -v +x /usr/local/bin/docker-compose
+sudo systemctl enable docker.service
+sudo systemctl start docker.service
+sudo systemctl status docker.service
+echo "$PATH"
+export PATH=$PATH:/usr/local/bin
+sudo find / -name "docker-compose" -ls
+docker version
+docker-compose version
+docker container run --publish --detach 80:80 nginx
+docker ps -a
+
