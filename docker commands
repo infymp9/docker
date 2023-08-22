@@ -20,4 +20,27 @@ docker version
 docker-compose version
 docker container run --publish --detach 80:80 nginx
 docker ps -a
+ps -ef | grep docker
+docker info 
+Example: enpty container
+docker run --> container with unique Id -t terminal session -i interactive <name of the docker image> <command>
+echo $SHELL
+docker run -it ubuntu /bin/bash
+hostname
+echo $SHELL
+pa -ef
+exit
+docker run  --name <string> -it ubuntu /bin/bash
+docker run --name project -it ubuntu /bin/bash
+cd /tmp
+echo "test" > filename
+docker ps  --> list of  images
+docker ps -a 
+docker start CID or name 
+docker start project
+docker ps -a
+docker ps
+docker attach project
+exit
+docker run --name project1 -d ubuntu //bin/bash -c "while true; do echo Hello Manoj; sleep 1; done"
 
