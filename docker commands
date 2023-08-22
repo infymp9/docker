@@ -43,4 +43,9 @@ docker ps
 docker attach project
 exit
 docker run --name project1 -d ubuntu //bin/bash -c "while true; do echo Hello Manoj; sleep 1; done"
+docker logs project1
+docker logs -f project1  --> live o/p of inside docker container.
+which docker
+file /bin/ls   --> executables
+
 
