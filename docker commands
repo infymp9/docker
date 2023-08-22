@@ -47,5 +47,14 @@ docker logs project1
 docker logs -f project1  --> live o/p of inside docker container.
 which docker
 file /bin/ls   --> executables
+docker stop name or id
+
+docker ps -a --> lists all containers
+docker ps -q  --> shows only cid
+docker rm cid 
+docker top cid
+docker inspect cid or name
+docker inspect --format '{{ .NetworkSetting.IPAddress }}' cid
+
 
 
