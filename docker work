@@ -1,0 +1,53 @@
+#how to verify docker installation
+sudo -i
+docker --version
+docker container run --publish 80:80 -d nginx
+docker ps
+curl localhost
+docker images
+###if you are using normal user
+usermod -aG docker username
+docker container run --publish 81:80 -d httpd
+docker ps
+curl localhost:81
+docker container run --publish 82:80 -d httpd
+docker ps
+curl localhost:82
+docker images
+###container are running as process
+docker ps
+docker top c9391
+ps aux
+kill -9 16795
+docker ps
+docker ps -a
+docker start c93
+docker ps
+clear
+###to check container are running as cggroup
+docker container stats
+###to come out
+ctrl c
+###lets delete all the nginx container
+docker ps
+docker rm c93 0b --force
+####delete the nginx image
+docker rmi nginx --force
+docker images
+docker run --publish --detach nginx
+docker run --publish 80:80 --detach nginx
+docker run --publish 81:80 --detach nginx
+docker images
+docker info
+###docker network
+docker network ls
+docker network inspect bridge
+
+###how to convert an existing application into an container based image
+docker exec -it d5a bash
+docker ps
+docker commit -p d5a3fefdf my-backup
+docker images
+docker login
+docker tag bd7e97294665 gopal1409/nginx
+docker push gopal1409/nginx
