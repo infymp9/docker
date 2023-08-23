@@ -55,6 +55,31 @@ docker rm cid
 docker top cid
 docker inspect cid or name
 docker inspect --format '{{ .NetworkSettings.IPAddress }}' CID
+docker inspect --format='{{ .State.Running }}' CID
+docker run --name C003 --it ubuntu /bin/bash
+cd /tmp
+touch FIRST
+exit
+docker ps -a
+docker start C003
+docker exec C003 hostname
+docker ps
+docker exec C003 touch /tmp/SECOND
+docker attach C003
+cd /tmp
+ll
+exit  --> container would be stop
+run a command in a running container without attaching to it
+docker exec <CID>
+docker exec cid hostname
+docker exec -d cid ls
+dispaly a live stream of container(s) resource usage statistics
+docker stats <CIDs>
+docker start cid 
+
+
+
+
 
 
 
