@@ -54,7 +54,7 @@ docker ps -q  --> shows only cid
 docker rm cid 
 docker top cid
 docker inspect cid or name
-docker inspect --format '{{ .NetworkSetting.IPAddress }}' cid
+docker inspect --format '{{ .NetworkSettings.IPAddress }}' CID
 
 
 
