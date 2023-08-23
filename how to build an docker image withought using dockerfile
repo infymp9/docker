@@ -1,14 +1,14 @@
 #####lets clone an spring app compile it
 sudo -i
 ###install the necessary packages
-2  apt-get update
-    3  apt install default-jdk
-    4  apt install maven
-    5  apt install docker.io
-6. apt install git
+apt-get update
+apt install default-jdk
+apt install maven
+apt install docker.io
+apt install git
 docker login
 #####clone the repo
-10  git clone https://github.com/gopal1409/springchat.git
-   11  cd springchat/
-   12  mvn clean package
-    mvn compile com.google.cloud.tools:jib-maven-plugin:3.1.1:build -Djib.from.image=eclipse-temurin -Djib.to.image=docker.io/gopal1409/chatapp
+git clone https://github.com/gopal1409/springchat.git
+cd springchat/
+mvn clean package
+mvn compile com.google.cloud.tools:jib-maven-plugin:3.1.1:build -Djib.from.image=eclipse-temurin -Djib.to.image=docker.io/gopal1409/chatapp
