@@ -1,0 +1,80 @@
+DOCKER
+Developers/Testers:-
+Portable runtime environment, missing dependencies,   packages, Run tests faster
+Sys-admin:-
+Cost & Performance,   Efficient, Consistent & repeatable, speed, reliability of CD & CI
+Docker:-Docker is platform for developing, shipping & running applications using an open-source container based technology, OS level virtualization, run everywhere – physical or virtual or cloud, Run anything – if it can run on host, it can run in the container.
+Why Docker: - Scalable – lightweight, Portable – Docker’s Apps can run anywhere, Build any app in any language using any stack, you don’t have to pre-allocate any RAM, Docker ensures your applications and resources are isolated and segregated, Environment standardization and version control
+Docker doesn’t contain kernel, it uses base OS kernel, No need of pre-allocation of RAM & Hard Disk
+Docker image: - Docker Image is made up of file system, A Docker base image is nothing but an OS user space minus the kernel, Base is a boot filesystem, bootfs uses a Union File System & root filesystem stays in read-only mode. Basically a tar file.
+When a container is launched from an image, Docker mounts a read-write filesystem on top of any layers.
+Docker Components:- 
+Core Components: - Docker Daemon (Docker engine, runs on the host machine).
+Docker Client (CLI used to interact with the daemon).
+Workflow Components: - Docker Image (Templates which holds the environment & your applications), Docker Container (run time instances created from images. Start, Stop, Run, Delete), Docker Registry (public and private repositories used to store images), Docker file (Automates image construction)
+Docker commands:-
+docker info
+ps –ef |grep docker
+docker run –it Ubuntu /bin/bash
+exit (exit from the current container like Ubuntu )
+docker run --name C001 –it ubuntu /bin/bash (name given to this container)
+docker ps     (shows all the running containers)
+docker ps –a  (shows all the available containers)
+docker start C001 (starting the stopped container)
+docker attach C001 (going inside the container)
+docker run –-name c002d –d Ubuntu /bin/bash   (deamonized container)
+docker logs –f C002d (gives live streaming output from the deamonized container)
+docker stop container ID/container name
+docker ps(-a=lists all containers,  -q shows only container Id)
+docker rm container Id/container name
+docker top container Id/container name (shows all the processes)
+docker inspect container Id/container name (shows all the properties of the container)
+docker inspect –-format ‘{{ .NetworkSettings.IPAddress }}’ C002  (shows IP Address)
+docker exec C003 hostname   (from the host machine can see the container host name)
+docker stats C003   (Display Live stream of container resource usage statistics ) 
+docker events –-since ‘1h’ (shows history from last 1hr what we have done till now)
+docker events –-filter event=create
+docker events –-filter event=create –-filter event=die –-filter event=attach
+Exposing Our container With Port Redirects
+docker run –-name C005 –p 80:80 nginx:latest
+DATA Volumes
+A volume is a specially designed directory with in one or more containers that bypasses the union file system, volume can be shared & reused b/w containers, container doesn’t have to be Running to share it volumes, changes to a volume are made directory, changes to a volume will not be included when u update an image volume persist until no containers use them.
+Container to container:-
+docker run –-name C006 –v /usr/data –it ubuntu /bin/base   (declared as a volume)
+docker run  - -name C007 --privileged=true --volumes –from C006 --volume -from C005 –it ubuntu /bin/bash (whatever the data is available in containers C005,C006 that same data will be replicated in container C007)
+Host to container:-
+docker run –-name C008 –v /home/usr/Docker/:/usr/data –it ubuntu /bin/bash
+docker images (shows images)
+docker search Jenkins (shows all Jenkins images)
+docker diff C008   (shows the difference what we had & right now what we have)
+docker commit C008  (creates image from the containers)
+docker tag <image Id> <img name> 
+docker run –-name C009 –it <img name/img Id> /bin/bash
+docker build –t <img name> Dockerfile (creates Docker img from the docker file)
+
+Docker File
+FROM ubuntu
+RUN apt-get install vim/touch /tmp/file1
+CMD {(This is the first command to execute), should not given /bin/bash then CMD is the first executed. If you give like this(docker run –it <img name> /bin/bash) then /bin/bash will be override & take precedence /bin/bash over CMD}
+ENTRYPOINT:-{if u give like this(docker run –it <img name>), whatever the commands we have given in ENTRYPOINT(in docker file) those only will execute. If you give like this(docker run –it <img name> /bin/bash) then you will see the output what we have given in ENTRYPOINT and appended with /bin/bash.}
+WORKDIR:- If you specify WORKDIR in Docker file when we create the container by default we will be logging into that directory and executing all the command from the directory.
+I don’t want user the Docker file to specify the working directory, another way of specifying working directory is (docker run –w /usr –it ubuntu /bin/bash) –w flag is important.
+ENV: - Set environment variables during the img build process
+USER: - if you specify USER in Docker file then, when we create docker container by default you will be login into that USER account. Suppose if you don’t want user Docker file. Another way of specifying USER account is (docker run –u hari –it <img name> /bin/bash) –u flag is important
+COPY: - Adds file & directories from our host machines to container
+ADD: - Similar to copy whereas it can extract archives
+MAINTAINER:-Tells u who wrote the Dockerfile
+EXPOSE: - 80 Tells Docker what ports are to be published in this image
+RUN apt-get update && apt-get install –y apache2 && apt-get clean && rm –rf /var/lib/apt/lists/*
+Dockerfile is the default file name. We can customize this file name by using –f flag.
+docker rmi <image name> (Deletes img )
+docker rmi –f <img name>  (Deletes img forcefully)
+docker rmi `docker images –a –q`
+docker images –a –q  (Displays in short format)
+Deploying a registry server
+docker run –d –p 5000:5000 –-restart=always –-name myregistry registry:2
+docker tag myapache localhost:5000/myapache(we have given a tag for our reference myapache and set port 5000, we have created the reference)
+docker push localhost:5000/myapache (push to registry)
+docker pull localhost:5000/myapache (pull the image from registry)
+docker stop registry (stop registry)
+docker rm –v registry (stop registry)
