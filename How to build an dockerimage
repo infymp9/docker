@@ -1,23 +1,23 @@
 #####lets clone an spring app compile it
 sudo -i
 ###install the necessary packages
-2  apt-get update
-    3  apt install default-jdk
-    4  apt install maven
-    5  apt install docker.io
-6. apt install git
+apt-get update
+apt install default-jdk
+apt install maven
+apt install docker.io
+apt install git
 #####clone the repo
-10  git clone https://github.com/gopal1409/springchat.git
-   11  cd springchat/
-   12  mvn clean package
-   13  ls
-   14  clear
-   15  ls
-   16  cd target/
-   17  ls
-   18  cd ..
+git clone https://github.com/gopal1409/springchat.git
+cd springchat/
+mvn clean package
+ls
+clear
+ls
+target/
+ls
+cd ..
 ####inside the root directory lets create a docker file
-   19  nano dockerfile
+ nano dockerfile
 ###inside docker file we need to provide the instruction
 FROM openjdk
 MAINTAINER JOHN<john@gmail.com>
@@ -28,8 +28,7 @@ COPY ${JAR_FILE} websocket-demo.jar
 ENTRYPOINT ["java","-jar","/websocket-demo.jar"]
 ####to save this file press Ctrl x press y and enter
 ####build the image
- 22  docker build -t chatapp .
-  
-   24  docker images
-   25  docker run -p 80:8080 -d chatapp
-   26  docker ps
+docker build -t chatapp .
+docker images
+ docker run -p 80:8080 -d chatapp
+docker ps
