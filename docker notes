@@ -78,3 +78,4 @@ docker push localhost:5000/myapache (push to registry)
 docker pull localhost:5000/myapache (pull the image from registry)
 docker stop registry (stop registry)
 docker rm –v registry (stop registry)
+https://nileshganvir.hashnode.dev/deploying-application-on-docker-container
