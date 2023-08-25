@@ -2,16 +2,11 @@
 sudo -i
 ###install the necessary packages
 apt-get update
-apt install default-jdk
-apt install maven
-apt install docker.io
-apt install git
+apt install default-jdk  maven docker.io docker.io  git
 #####clone the repo
 git clone https://github.com/gopal1409/springchat.git
 cd springchat/
 mvn clean package
-ls
-clear
 ls
 target/
 ls
@@ -30,5 +25,5 @@ ENTRYPOINT ["java","-jar","/websocket-demo.jar"]
 ####build the image
 docker build -t chatapp .
 docker images
- docker run -p 80:8080 -d chatapp
+docker run -p 80:8080 -d chatapp
 docker ps
